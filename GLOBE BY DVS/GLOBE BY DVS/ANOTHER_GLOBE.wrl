@@ -1,0 +1,58 @@
+#VRML V2.0 utf8
+WorldInfo {
+ title "Untitled2"
+ info ["This Web3D Content was created with Vivaty Studio, a Web3D authoring tool"
+ "www.mediamachines.com"]
+}
+## Vizthumbnail  Thumb_ANOTHER_GLOBE_wrl276191589368754.jpg
+DEF NavigationInfo1 NavigationInfo {
+ avatarSize [
+  .25 1.6 .75
+ ]
+ visibilityLimit 0
+ speed 1
+ headlight TRUE
+ type "NONE"
+}
+DEF dad_Sphere1 Transform {
+ children [
+  DEF Sphere1 Shape {
+   appearance Appearance {
+    texture ImageTexture {
+     url [
+      "earthTextureMap.jpg"
+     ]
+    }
+    material DEF Red Material {
+     ambientIntensity 0.200
+     shininess 0.200
+     diffuseColor 1 0 0
+    }
+   }
+   geometry DEF GeoSphere1 Sphere {
+    radius 5.000
+   }
+  }
+ ]
+}
+DEF TimeSensor1 TimeSensor {
+ cycleInterval 4.000
+ loop TRUE
+ startTime -1.000
+}
+DEF TimeSensor1_rot0 OrientationInterpolator {
+ key [
+  0 .25 .5 .75 1 
+ ]
+ keyValue [
+  0 1 0 0 0 1 0 1.571 0 1 0 3.142 0 1 -0 -1.571 0 1 0 0 
+ ]
+}
+DEF vizx_init TimeSensor {
+ cycleInterval 0.100
+ loop TRUE
+}
+ROUTE vizx_init.cycleTime TO TimeSensor1.startTime
+ROUTE vizx_init.cycleTime TO vizx_init.stopTime
+ROUTE TimeSensor1.fraction_changed TO TimeSensor1_rot0.set_fraction
+ROUTE TimeSensor1_rot0.value_changed TO dad_Sphere1.set_rotation
